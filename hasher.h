@@ -4,15 +4,13 @@
 #include <QString>
 #include <QCryptographicHash>
 
+/* Class Hasher provides methods to work with hashes */
 class Hasher : public QCryptographicHash
 {
 public:
     Hasher(const QByteArray &data, Algorithm method); /* Constructor */
     ~Hasher(); /* Destructor */
-
     QString name, output;
-private:
-
 };
 
 #endif // HASHER_H
