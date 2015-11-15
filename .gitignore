@@ -32,3 +32,7 @@ Makefile
 #QtCtreator Qml
 .qmlproject.user
 .qmlproject.user.
+*.user
+MD5-GUI.pro.user.aed6964
+MD5-GUI.pro.user.b5fab42
+*.user

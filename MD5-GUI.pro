@@ -15,11 +15,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     databasedialog.cpp \
-    hasher.cpp
+    hasher.cpp \
 
 HEADERS  += mainwindow.h \
     databasedialog.h \
-    hasher.h
+    hasher.h \
 
 FORMS    += mainwindow.ui \
     databasedialog.ui

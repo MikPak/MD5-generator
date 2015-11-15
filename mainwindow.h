@@ -23,6 +23,8 @@ private slots:
 
     void on_generateButton_clicked();
 
+    void on_md5Edit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
 };
