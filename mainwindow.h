@@ -25,6 +25,10 @@ private slots:
 
     void on_md5Edit_editingFinished();
 
+    void on_actionQuit_triggered();
+
+    void on_actionOpen_database_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

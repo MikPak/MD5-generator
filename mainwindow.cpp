@@ -4,6 +4,7 @@
 #include <QMessageBox> // For error messages
 #include <QDebug>
 #include "hasher.h"
+#include "databasedialog.h"
 
 QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->statusBar->setSizeGripEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -75,8 +77,7 @@ void MainWindow::on_generateButton_clicked()
     if(md5Present) {
         checksumFile = new QFile(checksumFromPath);
         QFileInfo fileInfo(checksumFile->fileName()); // this returns b200df688805861d6364f97d4d387775.md5
-        QString comparisonMd5(fileInfo.fileName().section(".",0,0)); // let's chop off everything after .
-        //QString comparisonMd5 = checksumFile->fileName().section(".",0,0);
+        QString comparisonMd5(fileInfo.fileName().section(".",0,0)); // let's chop off . and everything after it
         qDebug() << "comparisonMd5: " << comparisonMd5;
         if(fileHash == comparisonMd5) {
             //Everything's nice and dandy
@@ -104,9 +105,26 @@ void MainWindow::on_md5Edit_editingFinished()
         checksumFromPath = input;
         md5Present = true;
     }
-    else {
+    if(input != "" && input.length() == 32) { // Input needs to be a valid MD5 checksum
         md5ComparisonChecksum = input;
         md5ChecksumPresent = true;
         ui->generateButton->setText("Compare");
     }
+    else {
+        md5ChecksumPresent = false;
+        ui->generateButton->setText("Generate");
+    }
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    QApplication::quit();
+}
+
+void MainWindow::on_actionOpen_database_triggered()
+{
+    //QDialog databaseDiag = new QDialog(0,0);
+    DatabaseDialog dbDiag;
+    dbDiag.
+    dbDiag.show();
 }
