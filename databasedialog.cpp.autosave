@@ -15,6 +15,7 @@ DatabaseDialog::DatabaseDialog(QWidget *parent) :
     query->exec();
     model->setQuery(*query);
     ui->tableView->setModel(model);
+    //close db
 
 
 }

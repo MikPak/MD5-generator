@@ -16,10 +16,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     databasedialog.cpp \
     hasher.cpp \
+    md5table.cpp \
+    database.cpp
 
 HEADERS  += mainwindow.h \
     databasedialog.h \
     hasher.h \
+    md5table.h
 
 FORMS    += mainwindow.ui \
     databasedialog.ui
