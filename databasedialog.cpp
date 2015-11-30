@@ -7,14 +7,14 @@ DatabaseDialog::DatabaseDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     //Let's load the sqlite db
-    QSqlQueryModel * model = new QSqlQueryModel();
+    //QSqlQueryModel * model = new QSqlQueryModel();
     //open db
-    QSqlQuery* query = new QSqlQuery(/*DB here*/);
+    //QSqlQuery* query = new QSqlQuery(/*DB here*/);
 
-    query->prepare();
-    query->exec();
-    model->setQuery(*query);
-    ui->tableView->setModel(model);
+    //query->prepare();
+    //query->exec();
+    //model->setQuery(*query);
+    //ui->tableView->setModel(model);
 
 
 }

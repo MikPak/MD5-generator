@@ -3,14 +3,16 @@
 #include <QFile>
 #include <QDir>
 #include <QCoreApplication>
+#include <QtSql/QSqlDatabase>
 
+/*
 QSqlDatabase db;
 QDir dir;
 QString dbName = "hash.db3";
 
 int init(){
     //Where are we?
-    dir(QCoreApplication::applicationDirPath());
+    //dir(QCoreApplication::applicationDirPath());
     //let's search for database
 
     dir.setFilter(QDir::Files);
@@ -39,3 +41,4 @@ int close(){
     db.close();
     return 1;
 }
+*/

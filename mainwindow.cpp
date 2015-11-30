@@ -125,6 +125,6 @@ void MainWindow::on_actionOpen_database_triggered()
 {
     //QDialog databaseDiag = new QDialog(0,0);
     DatabaseDialog dbDiag;
-    dbDiag.
+    //dbDiag.
     dbDiag.show();
 }
