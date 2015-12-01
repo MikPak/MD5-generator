@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT	 += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,14 +16,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     databasedialog.cpp \
-    hasher.cpp \
-    md5table.cpp \
-    database.cpp
+    hasher.cpp
 
 HEADERS  += mainwindow.h \
     databasedialog.h \
-    hasher.h \
-    md5table.h
+    hasher.h
 
 FORMS    += mainwindow.ui \
     databasedialog.ui

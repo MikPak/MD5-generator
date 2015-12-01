@@ -5,17 +5,17 @@ DatabaseDialog::DatabaseDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DatabaseDialog)
 {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("hash.db3");
+    if(db.open()) {
+        qDebug() << "DB connection " << db.connectionName() <<
+                   " established";
+        QSqlQuery query;
+        query.exec("create table hashes(id int primary key, "
+                   "string varchar(100),"
+                   "hash varchar(32))");
+    }
     ui->setupUi(this);
-    //Let's load the sqlite db
-    //QSqlQueryModel * model = new QSqlQueryModel();
-    //open db
-    //QSqlQuery* query = new QSqlQuery(/*DB here*/);
-
-    //query->prepare();
-    //query->exec();
-    //model->setQuery(*query);
-    //ui->tableView->setModel(model);
-
 
 }
 

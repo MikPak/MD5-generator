@@ -2,6 +2,9 @@
 #define DATABASEDIALOG_H
 
 #include <QDialog>
+#include <QDebug>
+#include <QtSql/QSql>
+#include <QtSql/QSqlQuery>
 
 namespace Ui {
 class DatabaseDialog;
