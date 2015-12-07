@@ -12,3 +12,8 @@ DatabaseDialog::~DatabaseDialog()
 {
     delete ui;
 }
+
+void DatabaseDialog::on_pushButton_Close_clicked()
+{
+    this->close();
+}
