@@ -5,12 +5,15 @@
 #include <QDebug>
 #include "hasher.h"
 #include "databasedialog.h"
+#include "Database.h"
 
 QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare
 QString md5ComparisonChecksum;
 QFile* fileToGenerateFrom;
 QFile* checksumFile;
+
+Database litesql;
 
 bool md5Present = false;
 bool md5ChecksumPresent = false;
@@ -20,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->statusBar->setSizeGripEnabled(false);
+    litesql.connect();
 }
 
 MainWindow::~MainWindow()
@@ -89,6 +93,7 @@ void MainWindow::on_generateButton_clicked()
     }
     else {
         ui->md5Edit->setText(fileHash);
+        litesql.insert(fileHash, fileToGenerateFrom->fileName());
     }
 }
 

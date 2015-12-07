@@ -1,44 +1,43 @@
-#include <QtSql/QtSql>
-#include <QString>
-#include <QFile>
-#include <QDir>
-#include <QCoreApplication>
-#include <QtSql/QSqlDatabase>
+#include "Database.h"
 
-/*
-QSqlDatabase db;
-QDir dir;
-QString dbName = "hash.db3";
+Database::Database()
+{
 
-int init(){
-    //Where are we?
-    //dir(QCoreApplication::applicationDirPath());
-    //let's search for database
-
-    dir.setFilter(QDir::Files);
-    QStringList qsl;
-    qsl.append(dbName); //only a file with appropriate name is wanted
-    dir.setNameFilters(qsl);
-
-    return 1;
 }
 
-int setupDb(){
-    db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(dbName);
-    return 1;
+Database::~Database() {
+
 }
 
-int connect(){
+int Database::connect() {
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("hash.db3");
     if(db.open()) {
-        qDebug() << ">DB connection" << db.databaseName() << "established";
+        qDebug() << "DB connection " << db.connectionName() <<
+                   " established";
+        QSqlQuery query;
+        query.exec("create table hashes(id INTEGER PRIMARY KEY, "
+                   "string varchar(100),"
+                   "hash varchar(32))");
+
+        return 1;
+    } else {
+        return 0;
     }
-
-    return 1;
 }
 
-int close(){
-    db.close();
-    return 1;
+int Database::insert(QString hash, QString filename) {
+        QSqlQuery query;
+        query.prepare("INSERT INTO hashes (id,string, hash) "
+                      "VALUES (NULL, ?, ?)");
+        query.addBindValue(filename);
+        query.addBindValue(hash);
+
+        if(!query.exec()) {
+            qDebug() << "Error running query:" << query.lastError();
+            return 0;
+        } else {
+            return 1;
+        }
+        qDebug() << hash << " " << filename;
 }
-*/
