@@ -5,11 +5,8 @@
 #include <QDebug>
 #include "hasher.h"
 #include "databasedialog.h"
-<<<<<<< HEAD
 #include "Database.h"
-=======
 #include "aboutdialog.h"
->>>>>>> 1746b20eb4f3b9686c10bafeff6bfe75be25fa71
 
 QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare

@@ -6,6 +6,7 @@
 
 QT       += core gui
 QT	 += sql
+QT       += webkitwidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -17,12 +18,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     databasedialog.cpp \
     hasher.cpp \
-    aboutdialog.cpp
+    aboutdialog.cpp \
+    database.cpp
 
 HEADERS  += mainwindow.h \
     databasedialog.h \
     hasher.h \
-    aboutdialog.h
+    aboutdialog.h \
+    database.h
 
 FORMS    += mainwindow.ui \
     databasedialog.ui \
