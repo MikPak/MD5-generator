@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>AboutDialog</class>
  <widget class="QDialog" name="AboutDialog">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +14,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>About</string>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <widget class="QWidget" name="gridLayoutWidget">
    <property name="geometry">
@@ -27,7 +33,7 @@
      <widget class="QWebView" name="webView">
       <property name="url">
        <url>
-        <string>about:blank</string>
+        <string>file:///about.html</string>
        </url>
       </property>
      </widget>

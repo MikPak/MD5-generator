@@ -137,6 +137,6 @@ void MainWindow::on_actionOpen_database_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    //abDiag = new abDiag(this);
-    //abDiag->show();
+    abDiag = new AboutDialog(this);
+    abDiag->show();
 }

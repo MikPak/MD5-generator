@@ -156,7 +156,6 @@
     <property name="title">
      <string>File</string>
     </property>
-    <addaction name="actionSave_to_database"/>
     <addaction name="actionOpen_database"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>

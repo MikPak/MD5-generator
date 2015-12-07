@@ -2,7 +2,8 @@
 #define ABOUTDIALOG_H
 
 #include <QDialog>
-
+#include <QtWebKitWidgets/QWebView>
+#include <QUrl>
 namespace Ui {
 class AboutDialog;
 }

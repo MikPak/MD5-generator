@@ -6,6 +6,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog)
 {
     ui->setupUi(this);
+    ui->webView->load(QUrl("http://student.labranet.jamk.fi/~H8535/MD5/about.html"));
+    ui->webView->show();
 }
 
 AboutDialog::~AboutDialog()
