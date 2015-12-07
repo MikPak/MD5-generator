@@ -53,9 +53,9 @@ QSqlTableModel* Database::constructModel() {
     model->setTable("hashes");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();
-    model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
-    model->setHeaderData(1, Qt::Horizontal, QObject::tr("string"));
-    model->setHeaderData(2, Qt::Horizontal, QObject::tr("hash"));
+    model->removeColumn(0); // don't show the ID
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("String/File"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Hash"));
 
     return model;
 
