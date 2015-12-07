@@ -1,7 +1,7 @@
 #include <QSqlTableModel>
 #include <QTableView>
 #include <QObject>
-#include "Database.h"
+#include "database.h"
 
 Database::Database()
 {
@@ -48,7 +48,7 @@ int Database::insert(QString hash, QString filename) {
         qDebug() << hash << " " << filename;
 }
 
-void Database::constructModel() {
+QSqlTableModel* Database::constructModel() {
     QSqlTableModel *model = new QSqlTableModel();
     model->setTable("hashes");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
@@ -57,8 +57,7 @@ void Database::constructModel() {
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("string"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("hash"));
 
-    QTableView *view = new QTableView;
-    view->setModel(model);
-    view->show();
+    return model;
+
 
 }

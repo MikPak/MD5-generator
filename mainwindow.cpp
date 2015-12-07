@@ -5,7 +5,7 @@
 #include <QDebug>
 #include "hasher.h"
 #include "databasedialog.h"
-#include "Database.h"
+#include "database.h"
 #include "aboutdialog.h"
 
 QString fileFromPath; //A path to generate md5 checksum from
@@ -95,7 +95,7 @@ void MainWindow::on_generateButton_clicked()
     else {
         ui->md5Edit->setText(fileHash);
         litesql.insert(fileHash, fileToGenerateFrom->fileName()); // Insert to DB
-        litesql.constructModel();
+
     }
 }
 

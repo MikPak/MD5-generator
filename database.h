@@ -12,7 +12,7 @@ public:
     ~Database();
     int connect();
     int insert(QString, QString);
-    void constructModel();
+    QSqlTableModel* constructModel();
 };
 
 #endif // DATABASE_H
