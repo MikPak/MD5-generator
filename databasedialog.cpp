@@ -11,6 +11,10 @@ DatabaseDialog::DatabaseDialog(QWidget *parent) :
 
     QTableView *view = new QTableView();
     ui->tableView->setModel(litesql.constructModel());
+    for (int col=0; col<2; col++)
+    {
+       ui->tableView->setColumnWidth(col,250);
+    }
     /*view->setModel(litesql.constructModel());
     ui->tableView = view;
     ui->tableView->;*/
