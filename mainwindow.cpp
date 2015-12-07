@@ -5,6 +5,7 @@
 #include <QDebug>
 #include "hasher.h"
 #include "databasedialog.h"
+#include "aboutdialog.h"
 
 QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare
@@ -123,8 +124,13 @@ void MainWindow::on_actionQuit_triggered()
 
 void MainWindow::on_actionOpen_database_triggered()
 {
-    //QDialog databaseDiag = new QDialog(0,0);
     DatabaseDialog dbDiag;
-    //dbDiag.
-    dbDiag.show();
+    dbDiag.setModal(true);
+    dbDiag.exec();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    abDiag = new abDiag(this);
+    abDiag->show();
 }

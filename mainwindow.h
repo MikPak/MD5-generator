@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+#include "aboutdialog.h"
 namespace Ui {
 class MainWindow;
 }
@@ -29,8 +29,11 @@ private slots:
 
     void on_actionOpen_database_triggered();
 
+    void on_actionAbout_triggered();
+
 private:
     Ui::MainWindow *ui;
+    AboutDialog *abDiag;
 };
 
 #endif // MAINWINDOW_H
