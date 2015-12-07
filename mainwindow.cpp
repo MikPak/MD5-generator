@@ -94,7 +94,8 @@ void MainWindow::on_generateButton_clicked()
     }
     else {
         ui->md5Edit->setText(fileHash);
-        litesql.insert(fileHash, fileToGenerateFrom->fileName());
+        litesql.insert(fileHash, fileToGenerateFrom->fileName()); // Insert to DB
+        litesql.constructModel();
     }
 }
 
@@ -136,6 +137,6 @@ void MainWindow::on_actionOpen_database_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    abDiag = new abDiag(this);
-    abDiag->show();
+    //abDiag = new abDiag(this);
+    //abDiag->show();
 }
