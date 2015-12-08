@@ -1,8 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <QFileDialog>
-#include <QMessageBox> // For error messages
-#include <QDebug>
 #include "hasher.h"
 #include "databasedialog.h"
 #include "database.h"
