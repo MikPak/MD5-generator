@@ -32,7 +32,10 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/*
+void MainWindow::on_fileBrowseButton_clicked()
+This is called when Browse button next to the input field
+is clicked*/
 void MainWindow::on_fileBrowseButton_clicked() {
 
     fileFromPath =QFileDialog::getOpenFileName(this,tr("Open File"),".","All files (*.*)");
@@ -41,7 +44,10 @@ void MainWindow::on_fileBrowseButton_clicked() {
     //QMessageBox::information(this,tr("File Name: "),filename);
     ui->fileInputEdit->setText(fileFromPath);
 }
-
+/*
+void MainWindow::on_md5BrowseButton_clicked()
+This is called when Browse button next to the MD5 field
+is clicked*/
 void MainWindow::on_md5BrowseButton_clicked()
 {
     checksumFromPath =QFileDialog::getOpenFileName(this,tr("Open File"),".","MD5 File (*.md5)");
@@ -58,7 +64,10 @@ void MainWindow::on_md5BrowseButton_clicked()
         //md5ChecksumPresent = true;
     }
 }
-
+/*
+ *void MainWindow::on_generateButton_clicked()
+ * This is called when Generate button is clicked. Inserts the data to sqlite DB
+*/
 void MainWindow::on_generateButton_clicked()
 {
     //If there is a MD5 file selected we are doing checksum generation and comparison
@@ -95,7 +104,14 @@ void MainWindow::on_generateButton_clicked()
 
     }
 }
-
+/*
+ *void MainWindow::on_md5Edit_editingFinished()
+ * Called when cursor is no longer on the field, meaning the focus has shifted to
+ * some other element.
+ * Checks for 32 characters long string in MD5 field if there is one
+ * Button text changes to compare and comparison is done when clicked, otherwise
+ * MD5 checksum is generated from input
+*/
 void MainWindow::on_md5Edit_editingFinished()
 {
     //User's input checking
@@ -119,25 +135,42 @@ void MainWindow::on_md5Edit_editingFinished()
         ui->generateButton->setText("Generate");
     }
 }
-
+/*
+ * void MainWindow::on_actionQuit_triggered()
+ * if quit is pressed from the file menu this is called and program stops
+ * execution
+ */
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
 }
-
+/*
+ * void MainWindow::on_actionOpen_database_triggered()
+ * When "Open Database" is clicked from File menu this is called.
+ * This one simply creates an instance of DatabaseDialog and shows it
+ */
 void MainWindow::on_actionOpen_database_triggered()
 {
     DatabaseDialog dbDiag;
     dbDiag.setModal(true);
     dbDiag.exec();
 }
-
+/*
+ *void MainWindow::on_actionAbout_triggered()
+ *When "About" from "Info" is clicked new instance of AboutDialog is created
+ * which is nonModal - meaning rest of the program can be used while this
+ * dialog is open.
+ */
 void MainWindow::on_actionAbout_triggered()
 {
     abDiag = new AboutDialog(this);
     abDiag->show();
 }
-
+/*
+ * void MainWindow::on_fileInputEdit_editingFinished()
+ * When user (or program) has finished editing this field input will be checked
+ * to see if it's a string or a file
+ */
 void MainWindow::on_fileInputEdit_editingFinished()
 {
     QString input;
