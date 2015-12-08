@@ -11,6 +11,10 @@
 QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare
 QString md5ComparisonChecksum;
+QString inputHash; //A hash from input which can be a file or a string
+
+QString stringToGenerateFrom;
+
 QFile* fileToGenerateFrom;
 QFile* checksumFile;
 
@@ -63,15 +67,21 @@ void MainWindow::on_generateButton_clicked()
     //If there is a MD5 file selected we are doing checksum generation and comparison
     //if only a file is selected we just generate MD5 checksum and send it to DB
     fileToGenerateFrom = new QFile(fileFromPath);
-    QString fileHash;
+
     if(fileToGenerateFrom->open(QIODevice::ReadOnly)){
-        qDebug() << "Opened target file\n";
+        qDebug() << "on_generateButton_clicked: Opened target file\n";
         Hasher hasher(fileToGenerateFrom->readAll(), QCryptographicHash::Md5);
-        fileHash = hasher.output;
+        inputHash = hasher.output;
         fileToGenerateFrom->close();
     }
+    else {
+        QByteArray stringToByte;
+        stringToByte.append(stringToGenerateFrom);
+        Hasher hasher(stringToByte,QCryptographicHash::Md5);
+        inputHash = hasher.output;
+    }
     if(md5ChecksumPresent) { // we don't have actual file but we do have md5 checksum
-        if(fileHash == md5ComparisonChecksum) {
+        if(inputHash == md5ComparisonChecksum) {
             //Everything's nice and dandy
             QMessageBox::information(this,tr("Success!"),tr("MD5 checksums match."));
         }
@@ -84,7 +94,7 @@ void MainWindow::on_generateButton_clicked()
         QFileInfo fileInfo(checksumFile->fileName()); // this returns b200df688805861d6364f97d4d387775.md5
         QString comparisonMd5(fileInfo.fileName().section(".",0,0)); // let's chop off . and everything after it
         qDebug() << "comparisonMd5: " << comparisonMd5;
-        if(fileHash == comparisonMd5) {
+        if(inputHash == comparisonMd5) {
             //Everything's nice and dandy
             QMessageBox::information(this,tr("Success!"),tr("MD5 checksums match."));
         }
@@ -93,8 +103,8 @@ void MainWindow::on_generateButton_clicked()
         }
     }
     else {
-        ui->md5Edit->setText(fileHash);
-        litesql.insert(fileHash, fileToGenerateFrom->fileName()); // Insert to DB
+        ui->md5Edit->setText(inputHash);
+        litesql.insert(inputHash, fileToGenerateFrom->fileName()); // Insert to DB
 
     }
 }
@@ -139,4 +149,31 @@ void MainWindow::on_actionAbout_triggered()
 {
     abDiag = new AboutDialog(this);
     abDiag->show();
+}
+
+void MainWindow::on_fileInputEdit_editingFinished()
+{
+    QString input;
+    input = ui->fileInputEdit->text();
+    qDebug() << "\nUser's input: " << input;
+    QFileInfo checkFile(input);
+    //let's find out if we are working with a file or a string
+    if(checkFile.exists() && checkFile.isFile()) {
+        fileToGenerateFrom = new QFile(input);
+
+        if(fileToGenerateFrom->open(QIODevice::ReadOnly)){
+            qDebug() << "on_fileInputEdit_editingFinished: Opened target file\n";
+//            Hasher hasher(fileToGenerateFrom->readAll(), QCryptographicHash::Md5);
+//            inputHash = hasher.output;
+//            fileToGenerateFrom->close();
+        }
+        else {
+            QMessageBox::critical(this,tr("Error opening a file!"),tr("Read error!"));
+        }
+    }
+    //we are working with a string
+    else {
+        if(input != "")
+            stringToGenerateFrom = input;
+    }
 }

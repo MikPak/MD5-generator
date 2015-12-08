@@ -31,6 +31,8 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_fileInputEdit_editingFinished();
+
 private:
     Ui::MainWindow *ui;
     AboutDialog *abDiag;
