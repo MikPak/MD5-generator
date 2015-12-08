@@ -9,9 +9,9 @@ QString fileFromPath; //A path to generate md5 checksum from
 QString checksumFromPath; // a path to md5 checksum file to compare
 QString md5ComparisonChecksum;
 QString inputHash; //A hash from input which can be a file or a string
-
+QString stringToDB; //String or file name of input, which is saved to database
 QString stringToGenerateFrom;
-
+QByteArray byteInput;
 QFile* fileToGenerateFrom;
 QFile* checksumFile;
 
@@ -63,20 +63,10 @@ void MainWindow::on_generateButton_clicked()
 {
     //If there is a MD5 file selected we are doing checksum generation and comparison
     //if only a file is selected we just generate MD5 checksum and send it to DB
-    fileToGenerateFrom = new QFile(fileFromPath);
+    Hasher hasher(byteInput,QCryptographicHash::Md5);
+    inputHash = hasher.output;
 
-    if(fileToGenerateFrom->open(QIODevice::ReadOnly)){
-        qDebug() << "on_generateButton_clicked: Opened target file\n";
-        Hasher hasher(fileToGenerateFrom->readAll(), QCryptographicHash::Md5);
-        inputHash = hasher.output;
-        fileToGenerateFrom->close();
-    }
-    else {
-        QByteArray stringToByte;
-        stringToByte.append(stringToGenerateFrom);
-        Hasher hasher(stringToByte,QCryptographicHash::Md5);
-        inputHash = hasher.output;
-    }
+
     if(md5ChecksumPresent) { // we don't have actual file but we do have md5 checksum
         if(inputHash == md5ComparisonChecksum) {
             //Everything's nice and dandy
@@ -101,7 +91,7 @@ void MainWindow::on_generateButton_clicked()
     }
     else {
         ui->md5Edit->setText(inputHash);
-        litesql.insert(inputHash, fileToGenerateFrom->fileName()); // Insert to DB
+        litesql.insert(inputHash, stringToDB); // Insert to DB
 
     }
 }
@@ -160,9 +150,9 @@ void MainWindow::on_fileInputEdit_editingFinished()
 
         if(fileToGenerateFrom->open(QIODevice::ReadOnly)){
             qDebug() << "on_fileInputEdit_editingFinished: Opened target file\n";
-//            Hasher hasher(fileToGenerateFrom->readAll(), QCryptographicHash::Md5);
-//            inputHash = hasher.output;
-//            fileToGenerateFrom->close();
+            byteInput = fileToGenerateFrom->readAll();
+            stringToDB =fileToGenerateFrom->fileName();
+            fileToGenerateFrom->close();
         }
         else {
             QMessageBox::critical(this,tr("Error opening a file!"),tr("Read error!"));
@@ -170,7 +160,10 @@ void MainWindow::on_fileInputEdit_editingFinished()
     }
     //we are working with a string
     else {
-        if(input != "")
-            stringToGenerateFrom = input;
+        if(input != "") {
+            byteInput.append(input);
+            stringToDB = input;
+        }
+
     }
 }
